@@ -16,7 +16,7 @@ public class HomeController {
     private static Logger logger = LoggerFactory.getLogger(HomeController.class);
     @RequestMapping({"/","/index"})
     public String index(){
-        return"/index.html";
+        return"redirect:index.html";
     }
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Map<String, Object> map) throws Exception{
