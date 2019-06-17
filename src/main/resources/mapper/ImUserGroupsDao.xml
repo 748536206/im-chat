@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.instant.dao.ImUserGroupsDao">
+  <resultMap id="BaseResultMap" type="com.instant.entity.ImUserGroups">
+    <result column="ug_id" jdbcType="INTEGER" property="ugId" />
+    <result column="ug_name" jdbcType="VARCHAR" property="ugName" />
+    <result column="ug_createtime" jdbcType="TIMESTAMP" property="ugCreatetime" />
+    <result column="ug_adminid" jdbcType="INTEGER" property="ugAdminid" />
+    <result column="ug_icon" jdbcType="VARCHAR" property="ugIcon" />
+    <result column="ug_notice" jdbcType="VARCHAR" property="ugNotice" />
+    <result column="ug_intro" jdbcType="VARCHAR" property="ugIntro" />
+  </resultMap>
+  <sql id="Query_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Query_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      ug_id, ug_name, ug_createtime, ug_adminid, ug_icon, ug_notice, ug_intro
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByQuery" parameterType="com.instant.entity.ImUserGroupsQuery" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from im_user_groups
+    <if test="_parameter != null">
+      <include refid="Query_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <delete id="deleteByQuery" parameterType="com.instant.entity.ImUserGroupsQuery">
+    delete from im_user_groups
+    <if test="_parameter != null">
+      <include refid="Query_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.instant.entity.ImUserGroups">
+    insert into im_user_groups (ug_id, ug_name, ug_createtime, 
+      ug_adminid, ug_icon, ug_notice, 
+      ug_intro)
+    values (#{ugId,jdbcType=INTEGER}, #{ugName,jdbcType=VARCHAR}, #{ugCreatetime,jdbcType=TIMESTAMP}, 
+      #{ugAdminid,jdbcType=INTEGER}, #{ugIcon,jdbcType=VARCHAR}, #{ugNotice,jdbcType=VARCHAR}, 
+      #{ugIntro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.instant.entity.ImUserGroups">
+    insert into im_user_groups
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ugId != null">
+        ug_id,
+      </if>
+      <if test="ugName != null">
+        ug_name,
+      </if>
+      <if test="ugCreatetime != null">
+        ug_createtime,
+      </if>
+      <if test="ugAdminid != null">
+        ug_adminid,
+      </if>
+      <if test="ugIcon != null">
+        ug_icon,
+      </if>
+      <if test="ugNotice != null">
+        ug_notice,
+      </if>
+      <if test="ugIntro != null">
+        ug_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ugId != null">
+        #{ugId,jdbcType=INTEGER},
+      </if>
+      <if test="ugName != null">
+        #{ugName,jdbcType=VARCHAR},
+      </if>
+      <if test="ugCreatetime != null">
+        #{ugCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ugAdminid != null">
+        #{ugAdminid,jdbcType=INTEGER},
+      </if>
+      <if test="ugIcon != null">
+        #{ugIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="ugNotice != null">
+        #{ugNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="ugIntro != null">
+        #{ugIntro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByQuery" parameterType="com.instant.entity.ImUserGroupsQuery" resultType="java.lang.Long">
+    select count(*) from im_user_groups
+    <if test="_parameter != null">
+      <include refid="Query_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByQuerySelective" parameterType="map">
+    update im_user_groups
+    <set>
+      <if test="record.ugId != null">
+        ug_id = #{record.ugId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ugName != null">
+        ug_name = #{record.ugName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ugCreatetime != null">
+        ug_createtime = #{record.ugCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ugAdminid != null">
+        ug_adminid = #{record.ugAdminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ugIcon != null">
+        ug_icon = #{record.ugIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ugNotice != null">
+        ug_notice = #{record.ugNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ugIntro != null">
+        ug_intro = #{record.ugIntro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Query_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByQuery" parameterType="map">
+    update im_user_groups
+    set ug_id = #{record.ugId,jdbcType=INTEGER},
+      ug_name = #{record.ugName,jdbcType=VARCHAR},
+      ug_createtime = #{record.ugCreatetime,jdbcType=TIMESTAMP},
+      ug_adminid = #{record.ugAdminid,jdbcType=INTEGER},
+      ug_icon = #{record.ugIcon,jdbcType=VARCHAR},
+      ug_notice = #{record.ugNotice,jdbcType=VARCHAR},
+      ug_intro = #{record.ugIntro,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Query_Where_Clause" />
+    </if>
+  </update>
+</mapper>

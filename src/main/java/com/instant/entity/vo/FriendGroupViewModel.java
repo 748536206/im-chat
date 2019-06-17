@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class FriendGroupViewModel extends BaseViewModel {
     private String groupname;
-    private Integer online;
+    private int online;
     private List<UserViewModel> list;
 
     public String getGroupname() {
