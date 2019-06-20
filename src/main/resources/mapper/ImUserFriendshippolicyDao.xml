@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.instant.dao.ImUserFriendshippolicyDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImUserFriendshippolicy">
-    <result column="u_fp_id" jdbcType="INTEGER" property="uFpId" />
+    <id column="u_fp_id" jdbcType="INTEGER" property="uFpId" />
     <result column="u_friendshippolicy" jdbcType="VARCHAR" property="uFriendshippolicy" />
   </resultMap>
   <sql id="Query_Where_Clause">
@@ -88,6 +88,16 @@
       limit #{startRow} , #{pageSize}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    u_fp_id,u_friendshippolicy
+    from im_user_friendshippolicy
+    where u_fp_id = #{uFpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from im_user_friendshippolicy
+    where u_fp_id = #{uFpId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByQuery" parameterType="com.instant.entity.ImUserFriendshippolicyQuery">
     delete from im_user_friendshippolicy
     <if test="_parameter != null">
@@ -144,5 +154,19 @@
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.instant.entity.ImUserFriendshippolicy">
+    update im_user_friendshippolicy
+    <set>
+      <if test="uFriendshippolicy != null">
+        u_friendshippolicy = #{uFriendshippolicy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_fp_id = #{uFpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImUserFriendshippolicy">
+    update im_user_friendshippolicy
+    set u_friendshippolicy = #{uFriendshippolicy,jdbcType=VARCHAR}
+    where u_fp_id = #{uFpId,jdbcType=INTEGER}
   </update>
 </mapper>

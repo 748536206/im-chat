@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.instant.dao.ImMessagesDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImMessages">
-    <result column="m_id" jdbcType="INTEGER" property="mId" />
+    <id column="m_id" jdbcType="INTEGER" property="mId" />
     <result column="m_postmessages" jdbcType="VARCHAR" property="mPostmessages" />
     <result column="m_status" jdbcType="VARCHAR" property="mStatus" />
     <result column="m_time" jdbcType="TIMESTAMP" property="mTime" />
@@ -93,6 +93,16 @@
       limit #{startRow} , #{pageSize}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    m_id,m_postmessages,m_status,m_time,m_messagestypeid,m_ fromuserid,m_touserid
+    from im_messages
+    where m_id = #{mId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from im_messages
+    where m_id = #{mId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByQuery" parameterType="com.instant.entity.ImMessagesQuery">
     delete from im_messages
     <if test="_parameter != null">
@@ -203,5 +213,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.instant.entity.ImMessages">
+    update im_messages
+    <set>
+      <if test="mPostmessages != null">
+        m_postmessages = #{mPostmessages,jdbcType=VARCHAR},
+      </if>
+      <if test="mStatus != null">
+        m_status = #{mStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mTime != null">
+        m_time = #{mTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mMessagestypeid != null">
+        m_messagestypeid = #{mMessagestypeid,jdbcType=INTEGER},
+      </if>
+      <if test="mFromuserid != null">
+        "m_ fromuserid" = #{mFromuserid,jdbcType=INTEGER},
+      </if>
+      <if test="mTouserid != null">
+        m_touserid = #{mTouserid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImMessages">
+    update im_messages
+    set m_postmessages = #{mPostmessages,jdbcType=VARCHAR},
+      m_status = #{mStatus,jdbcType=VARCHAR},
+      m_time = #{mTime,jdbcType=TIMESTAMP},
+      m_messagestypeid = #{mMessagestypeid,jdbcType=INTEGER},
+      "m_ fromuserid" = #{mFromuserid,jdbcType=INTEGER},
+      m_touserid = #{mTouserid,jdbcType=INTEGER}
+    where m_id = #{mId,jdbcType=INTEGER}
   </update>
 </mapper>

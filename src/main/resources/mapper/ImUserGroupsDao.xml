@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.instant.dao.ImUserGroupsDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImUserGroups">
-    <result column="ug_id" jdbcType="INTEGER" property="ugId" />
+    <id column="ug_id" jdbcType="INTEGER" property="ugId" />
     <result column="ug_name" jdbcType="VARCHAR" property="ugName" />
     <result column="ug_createtime" jdbcType="TIMESTAMP" property="ugCreatetime" />
     <result column="ug_adminid" jdbcType="INTEGER" property="ugAdminid" />
@@ -93,6 +93,16 @@
       limit #{startRow} , #{pageSize}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    ug_id,ug_name,ug_createtime,ug_adminid,ug_icon,ug_notice,ug_intro
+    from im_user_groups
+    where ug_id = #{ugId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from im_user_groups
+    where ug_id = #{ugId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByQuery" parameterType="com.instant.entity.ImUserGroupsQuery">
     delete from im_user_groups
     <if test="_parameter != null">
@@ -203,5 +213,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.instant.entity.ImUserGroups">
+    update im_user_groups
+    <set>
+      <if test="ugName != null">
+        ug_name = #{ugName,jdbcType=VARCHAR},
+      </if>
+      <if test="ugCreatetime != null">
+        ug_createtime = #{ugCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ugAdminid != null">
+        ug_adminid = #{ugAdminid,jdbcType=INTEGER},
+      </if>
+      <if test="ugIcon != null">
+        ug_icon = #{ugIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="ugNotice != null">
+        ug_notice = #{ugNotice,jdbcType=VARCHAR},
+      </if>
+      <if test="ugIntro != null">
+        ug_intro = #{ugIntro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ug_id = #{ugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImUserGroups">
+    update im_user_groups
+    set ug_name = #{ugName,jdbcType=VARCHAR},
+      ug_createtime = #{ugCreatetime,jdbcType=TIMESTAMP},
+      ug_adminid = #{ugAdminid,jdbcType=INTEGER},
+      ug_icon = #{ugIcon,jdbcType=VARCHAR},
+      ug_notice = #{ugNotice,jdbcType=VARCHAR},
+      ug_intro = #{ugIntro,jdbcType=VARCHAR}
+    where ug_id = #{ugId,jdbcType=INTEGER}
   </update>
 </mapper>

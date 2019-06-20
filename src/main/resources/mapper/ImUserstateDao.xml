@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.instant.dao.ImUserstateDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImUserstate">
-    <result column="us_id" jdbcType="INTEGER" property="usId" />
+    <id column="us_id" jdbcType="INTEGER" property="usId" />
     <result column="us_name" jdbcType="VARCHAR" property="usName" />
   </resultMap>
   <sql id="Query_Where_Clause">
@@ -88,6 +88,16 @@
       limit #{startRow} , #{pageSize}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    us_id,us_name
+    from im_userstate
+    where us_id = #{usId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from im_userstate
+    where us_id = #{usId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByQuery" parameterType="com.instant.entity.ImUserstateQuery">
     delete from im_userstate
     <if test="_parameter != null">
@@ -144,5 +154,19 @@
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.instant.entity.ImUserstate">
+    update im_userstate
+    <set>
+      <if test="usName != null">
+        us_name = #{usName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where us_id = #{usId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImUserstate">
+    update im_userstate
+    set us_name = #{usName,jdbcType=VARCHAR}
+    where us_id = #{usId,jdbcType=INTEGER}
   </update>
 </mapper>

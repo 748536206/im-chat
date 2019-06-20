@@ -93,6 +93,7 @@ public class InitializationsServiceImpl implements InitializationsService {
                 bigGroupViewModelList.add(bigGroupViewModel);
             }
             layimInitDataViewModel.setGroup(bigGroupViewModelList);
+            return new Response().success(layimInitDataViewModel);
         }
         return new Response().failure("用户信息获取失败,初始化信息出现错误");
     }

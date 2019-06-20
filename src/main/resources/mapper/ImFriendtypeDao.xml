@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.instant.dao.ImFriendtypeDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImFriendtype">
-    <result column="ft_id" jdbcType="INTEGER" property="ftId" />
+    <id column="ft_id" jdbcType="INTEGER" property="ftId" />
     <result column="ft_name" jdbcType="VARCHAR" property="ftName" />
   </resultMap>
   <sql id="Query_Where_Clause">
@@ -88,6 +88,16 @@
       limit #{startRow} , #{pageSize}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    ft_id,ft_name
+    from im_friendtype
+    where ft_id = #{ftId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from im_friendtype
+    where ft_id = #{ftId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByQuery" parameterType="com.instant.entity.ImFriendtypeQuery">
     delete from im_friendtype
     <if test="_parameter != null">
@@ -144,5 +154,19 @@
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.instant.entity.ImFriendtype">
+    update im_friendtype
+    <set>
+      <if test="ftName != null">
+        ft_name = #{ftName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ft_id = #{ftId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImFriendtype">
+    update im_friendtype
+    set ft_name = #{ftName,jdbcType=VARCHAR}
+    where ft_id = #{ftId,jdbcType=INTEGER}
   </update>
 </mapper>
