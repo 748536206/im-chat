@@ -97,6 +97,13 @@
             <artifactId>nekohtml</artifactId>
             <version>1.9.22</version>
         </dependency>
+        <!---================================tio-websocket==========================================-->
+        <dependency>
+            <groupId>org.t-io</groupId>
+            <artifactId>tio-websocket-spring-boot-starter</artifactId>
+            <!--此版本号跟着tio主版本号一致即可-->
+            <version>3.3.2.v20190601-RELEASE</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

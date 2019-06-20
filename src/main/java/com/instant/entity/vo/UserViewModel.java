@@ -14,6 +14,7 @@ public class UserViewModel implements Serializable {
     private String avatar;
     private String status;
     private String sign;
+    private int    id;
 
     public String getUsername() {
         return username;
@@ -47,6 +48,14 @@ public class UserViewModel implements Serializable {
         this.sign = sign;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "UserViewModel{" +
@@ -54,6 +63,7 @@ public class UserViewModel implements Serializable {
                 ", avatar='" + avatar + '\'' +
                 ", status='" + status + '\'' +
                 ", sign='" + sign + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

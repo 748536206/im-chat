@@ -2,6 +2,7 @@ package com.instant.util;
 
 import com.instant.shiro.enity.UserInfo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

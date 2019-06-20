@@ -45,6 +45,7 @@ public class InitializationsServiceImpl implements InitializationsService {
             UserInfo userInfo = userService.selectUserInfo(userId);
             //按格组装用户信息
             UserViewModel userViewModel = new UserViewModel();
+            userViewModel.setId(userInfo.getUid());
             userViewModel.setUsername(userInfo.getUsername());
             userViewModel.setAvatar(userInfo.getAvatar());
             userViewModel.setSign(userInfo.getSign());
@@ -72,6 +73,7 @@ public class InitializationsServiceImpl implements InitializationsService {
                     for (ImFriends imFriends : imFriendsList) {
                         UserViewModel userViewMode2 = new UserViewModel();
                         UserInfo imFriendsInfo = userService.selectUserInfo(imFriends.getfFirendid());
+                        userViewMode2.setId(imFriendsInfo.getUid());
                         userViewMode2.setUsername(imFriendsInfo.getUsername());
                         userViewMode2.setAvatar(imFriendsInfo.getAvatar());
                         userViewMode2.setSign(imFriendsInfo.getStatus());
