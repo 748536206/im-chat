@@ -47,7 +47,7 @@ public class InitializationsServiceImpl implements InitializationsService {
             UserViewModel userViewModel = new UserViewModel();
             userViewModel.setUsername(userInfo.getUsername());
             userViewModel.setAvatar(userInfo.getAvatar());
-            userViewModel.setSign(userInfo.getStatus());
+            userViewModel.setSign(userInfo.getSign());
             userViewModel.setStatus(userInfo.getState());
             //填装用户信息
             layimInitDataViewModel.setMine(userViewModel);
@@ -70,12 +70,13 @@ public class InitializationsServiceImpl implements InitializationsService {
                     //循环好友信息做信息拼装
                     List<UserViewModel> userViewModelList = new ArrayList<>();
                     for (ImFriends imFriends : imFriendsList) {
+                        UserViewModel userViewMode2 = new UserViewModel();
                         UserInfo imFriendsInfo = userService.selectUserInfo(imFriends.getfFirendid());
-                        userViewModel.setUsername(imFriendsInfo.getUsername());
-                        userViewModel.setAvatar(imFriendsInfo.getAvatar());
-                        userViewModel.setSign(imFriendsInfo.getStatus());
-                        userViewModel.setStatus(imFriendsInfo.getState());
-                        userViewModelList.add(userViewModel);
+                        userViewMode2.setUsername(imFriendsInfo.getUsername());
+                        userViewMode2.setAvatar(imFriendsInfo.getAvatar());
+                        userViewMode2.setSign(imFriendsInfo.getStatus());
+                        userViewMode2.setStatus(imFriendsInfo.getState());
+                        userViewModelList.add(userViewMode2);
                     }
                     //放入用户信息
                     friendGroupViewModel.setList(userViewModelList);
@@ -88,7 +89,7 @@ public class InitializationsServiceImpl implements InitializationsService {
             for (ImUserGroups imUserGroups:imUserGroupsList){
                 BigGroupViewModel bigGroupViewModel=new BigGroupViewModel();
                 bigGroupViewModel.setGroupname(imUserGroups.getUgName());
-                bigGroupViewModel.setAvatar(imUserGroups.getUgNotice());
+                bigGroupViewModel.setAvatar(imUserGroups.getUgIcon());
                 bigGroupViewModel.setId(imUserGroups.getUgId());
                 bigGroupViewModelList.add(bigGroupViewModel);
             }
