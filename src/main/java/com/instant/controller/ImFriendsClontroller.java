@@ -26,8 +26,8 @@ public class ImFriendsClontroller {
      * @return
      */
     @RequestMapping(value = "/selectFriends", method = RequestMethod.GET)
-    public List<ImFriends> selectFriends(int fgId,int userId) {
-        List<ImFriends> imFriendsList = imFriendsService.selectFriends(fgId,userId);
+    public List<ImFriends> selectFriends(int userId) {
+        List<ImFriends> imFriendsList = imFriendsService.selectFriends(userId);
         return imFriendsList;
     }
 }

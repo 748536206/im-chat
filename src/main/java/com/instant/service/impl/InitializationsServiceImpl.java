@@ -8,6 +8,8 @@ import com.instant.entity.vo.LayimInitDataViewModel;
 import com.instant.entity.vo.UserViewModel;
 import com.instant.service.*;
 import com.instant.util.UserInfoUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
 
 @Service
 public class InitializationsServiceImpl implements InitializationsService {
+    private static Logger logger = LoggerFactory.getLogger(ImUserGroupsServiceImpl.class);
 
     @Autowired
     private UserService userService;
@@ -65,7 +68,7 @@ public class InitializationsServiceImpl implements InitializationsService {
                     //分组id
                     friendGroupViewModel.setId(imFriendgroups.getFgId());
                     //通过分组id和userid获取分组内的好友集合
-                    List<ImFriends> imFriendsList = imFriendsService.selectFriends(imFriendgroups.getFgId(), userId);
+                    List<ImFriends> imFriendsList = imFriendsService.selectFriends(userId);
                     //分组内人数
                     friendGroupViewModel.setOnline(imFriendsList.size());
                     //循环好友信息做信息拼装

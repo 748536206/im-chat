@@ -104,6 +104,13 @@
             <!--此版本号跟着tio主版本号一致即可-->
             <version>3.3.2.v20190601-RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

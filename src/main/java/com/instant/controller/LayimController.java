@@ -2,6 +2,8 @@ package com.instant.controller;
 
 import cn.hutool.core.util.IdUtil;
 import com.instant.entity.Response;
+import com.instant.service.LayimService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +16,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/layim")
 public class LayimController {
-
+    @Autowired
+    private LayimService layimService;
     /**
      * 用户未读消息个数(暂时模拟数据)
      * */
@@ -38,7 +41,7 @@ public class LayimController {
      * */
     @GetMapping(value = "/token")
     public Response token(){
-        return new Response().success(IdUtil.randomUUID());
+        return layimService.getUserToken();
     }
 
 

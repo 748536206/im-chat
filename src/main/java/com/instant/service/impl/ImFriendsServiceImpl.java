@@ -22,10 +22,9 @@ public class ImFriendsServiceImpl implements ImFriendsService {
      * @return
      */
     @Override
-    public List<ImFriends> selectFriends(int fgId, int userId) {
+    public List<ImFriends> selectFriends(int userId) {
         ImFriendsQuery imFriendsQuery = new ImFriendsQuery();
         ImFriendsQuery.Criteria criteria = imFriendsQuery.createCriteria();
-        criteria.andFIdEqualTo(fgId);
         criteria.andFUseridEqualTo(userId);
         List<ImFriends> imFriendsList = imFriendsDao.selectByQuery(imFriendsQuery);
         return imFriendsList;

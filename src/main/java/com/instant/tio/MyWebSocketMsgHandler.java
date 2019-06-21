@@ -1,28 +1,105 @@
 package com.instant.tio;
 
-import com.instant.tio.inter.MsgType;
+import com.instant.entity.ImFriends;
+import com.instant.entity.ImUserGroups;
+import com.instant.entity.UserInfo;
+import com.instant.service.ImFriendsService;
+import com.instant.service.ImUserGroupsService;
+import com.instant.service.UserService;
+import com.instant.tio.config.Const;
+import com.instant.tio.config.ShowcaseServerConfig;
+import com.instant.tio.packet.LayimToClientOnlineStatusMsgBody;
+import com.instant.tio.packet.convert.BodyConvert;
+import com.instant.util.SpringUtils;
+import com.instant.util.TokenVerify;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.core.ChannelContext;
+import org.tio.core.GroupContext;
 import org.tio.core.Tio;
+import org.tio.core.intf.Packet;
 import org.tio.http.common.HttpRequest;
 import org.tio.http.common.HttpResponse;
+import org.tio.http.common.HttpResponseStatus;
 import org.tio.websocket.common.WsRequest;
+import org.tio.websocket.common.WsResponse;
+import org.tio.websocket.common.WsSessionContext;
 import org.tio.websocket.server.handler.IWsMsgHandler;
+
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.List;
+import java.util.Objects;
 
 public class MyWebSocketMsgHandler implements IWsMsgHandler {
     private static Logger logger = LoggerFactory.getLogger(MyWebSocketMsgHandler.class);
-
+    private UserService userService = SpringUtils.getBean(UserService.class);
+    private ImUserGroupsService imUserGroupsService = SpringUtils.getBean(ImUserGroupsService.class);
+    private ImFriendsService imFriendsService = SpringUtils.getBean(ImFriendsService.class);
 
     @Override
     public HttpResponse handshake(HttpRequest httpRequest, HttpResponse httpResponse, ChannelContext channelContext) throws Exception {
-
-        //Tio.bindUser();
-        logger.info("----------------------------------");
-
-
+        String path = httpRequest.getRequestLine().getPath();
+        String token = URLDecoder.decode(path.substring(1), "utf-8");
+        String userId = TokenVerify.IsValid(token);
+        logger.info("-----------handshake------------" + ":" + userId);
+        if (userId == null) {
+            //没有token 未授权
+            httpResponse.setStatus(HttpResponseStatus.C401);
+        } else {
+            int uid = Integer.parseInt(userId);
+            //解析token
+            UserInfo userInfo = userService.selectUserInfo(uid);
+            if (userInfo == null) {
+                //没有找到用户
+                httpResponse.setStatus(HttpResponseStatus.C404);
+            } else {
+                channelContext.setAttribute(userId, userInfo);
+                //绑定用户ID
+                Tio.bindUser(channelContext, userId);
+                //绑定用户群组
+                List<ImUserGroups> imUserGroupsList = imUserGroupsService.selectGroupstouser(Integer.parseInt(userId));
+                //绑定用户群信息
+                if (null != imUserGroupsList && imUserGroupsList.size() > 0) {
+                    for (ImUserGroups imUserGroups : imUserGroupsList) {
+                        Tio.bindGroup(channelContext, String.valueOf(imUserGroups.getUgId()));
+                    }
+                }
+                //通知所有好友本人上线了
+                notify(channelContext, true);
+            }
+        }
         return httpResponse;
     }
+
+    /**
+     * 通知该用户的好友上线消息
+     */
+    private void notify(ChannelContext channelContext, boolean online) throws IOException {
+        int uid = Integer.parseInt(channelContext.userid);
+        //获取用户所有的好友ID
+        List<ImFriends> imFriendsList = imFriendsService.selectFriends(uid);
+        if (null == imFriendsList || imFriendsList.size() == 0) {
+            return;
+        }
+        //构建消息体
+        LayimToClientOnlineStatusMsgBody msgBody = new LayimToClientOnlineStatusMsgBody(uid, online);
+        WsResponse statusPacket = BodyConvert.getInstance().convertToTextResponse(msgBody);
+
+        //调用sendToAll的方法
+        Tio.sendToAll(channelContext.getGroupContext(), statusPacket, filterChannelContext -> {
+            //筛选掉已经移除和关闭的连接
+            if (filterChannelContext.isRemoved || filterChannelContext.isClosed) {
+                return false;
+            }
+            //筛选掉非当前用户好友的连接
+            String channelContextUserid = filterChannelContext.userid;
+            boolean exists = imFriendsList.stream().anyMatch(friendUserId ->
+                    friendUserId.equals(channelContextUserid));
+            return exists;
+        });
+    }
+
 
     /**
      * 握手成功
@@ -31,6 +108,7 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
     public void onAfterHandshaked(HttpRequest httpRequest, HttpResponse httpResponse, ChannelContext channelContext) throws Exception {
         logger.info("---------------------------握手成功---------------------------");
     }
+
     /**
      * 接收到bytes消息
      */
@@ -39,8 +117,12 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
         logger.info("---------------------------接收到bytes消息---------------------------");
         return null;
     }
+
+
     @Override
     public Object onClose(WsRequest wsRequest, byte[] bytes, ChannelContext channelContext) throws Exception {
+           notify(channelContext,false);
+           Tio.remove(channelContext,"onClose");
         return null;
     }
 
@@ -48,8 +130,8 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
      * 接收到文本消息
      */
     @Override
-    public Object onText(WsRequest wsRequest, String masg, ChannelContext channelContext) throws Exception {
-        logger.info("---------------------------接收到文本消息---------------------------{}"+masg);
+    public Object onText(WsRequest wsRequest, String text, ChannelContext channelContext) throws Exception {
+        logger.info("---------------------------接收到文本消息---------------------------{}" + text);
         return null;
     }
 }
