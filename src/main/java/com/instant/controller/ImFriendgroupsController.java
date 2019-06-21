@@ -37,7 +37,7 @@ public class ImFriendgroupsController {
     public static void main(String[] args) {
         String newPassword = new SimpleHash("MD5",//散列算法:这里使用MD5算法
                 "123456",//明文密码
-                ByteSource.Util.bytes("admin8d78869f470951332959580424d4bf4f"),//salt：用户名 + salt
+                ByteSource.Util.bytes("等风来8d78869f470951332959580424d4bf4f"),//salt：用户名 + salt
                 2//散列的次数，相当于MD5(MD5(**))
         ).toHex();
         System.out.println(newPassword);
