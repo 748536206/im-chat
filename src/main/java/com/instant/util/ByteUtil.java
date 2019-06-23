@@ -1,15 +1,10 @@
 package com.instant.util;
 
-import com.instant.tio.packet.LayimConst;
+import com.instant.tio.packet.ImyimConst;
 import org.tio.utils.json.Json;
 
 import java.io.IOException;
 
-/**
- * @author fyp
- * @crate 2017/11/20 7:07
- * @project SpringBootLayIM
- */
 public class ByteUtil {
     /**
      * 转换成byte[]
@@ -19,9 +14,9 @@ public class ByteUtil {
             return null;
         }
         if(obj instanceof String){
-            return ((String) obj).getBytes(LayimConst.CHAR_SET);
+            return ((String) obj).getBytes(ImyimConst.CHAR_SET);
         }
-        return Json.toJson(obj).getBytes(LayimConst.CHAR_SET);
+        return Json.toJson(obj).getBytes(ImyimConst.CHAR_SET);
     }
 
     /**
@@ -31,6 +26,6 @@ public class ByteUtil {
         if(bytes == null|| bytes.length == 0){
             return null;
         }
-        return new String(bytes,LayimConst.CHAR_SET);
+        return new String(bytes, ImyimConst.CHAR_SET);
     }
 }

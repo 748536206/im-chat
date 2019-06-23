@@ -80,12 +80,6 @@
             <artifactId>tio-core</artifactId>
             <version>3.3.2.v20190601-RELEASE</version>
         </dependency>
-        <!---================================hutool工具类==========================================-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.5.11</version>
-        </dependency>
         <!---================================shiro==========================================-->
         <dependency>
             <groupId>org.apache.shiro</groupId>

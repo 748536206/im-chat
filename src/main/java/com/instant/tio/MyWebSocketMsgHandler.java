@@ -6,36 +6,31 @@ import com.instant.entity.UserInfo;
 import com.instant.service.ImFriendsService;
 import com.instant.service.ImUserGroupsService;
 import com.instant.service.UserService;
-import com.instant.tio.config.Const;
-import com.instant.tio.config.ShowcaseServerConfig;
-import com.instant.tio.packet.LayimToClientOnlineStatusMsgBody;
-import com.instant.tio.packet.convert.BodyConvert;
+import com.instant.tio.packet.*;
+import com.instant.tio.service.ImAnalysisService;
 import com.instant.util.SpringUtils;
 import com.instant.util.TokenVerify;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.core.ChannelContext;
-import org.tio.core.GroupContext;
 import org.tio.core.Tio;
-import org.tio.core.intf.Packet;
 import org.tio.http.common.HttpRequest;
 import org.tio.http.common.HttpResponse;
 import org.tio.http.common.HttpResponseStatus;
 import org.tio.websocket.common.WsRequest;
 import org.tio.websocket.common.WsResponse;
-import org.tio.websocket.common.WsSessionContext;
 import org.tio.websocket.server.handler.IWsMsgHandler;
 
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.List;
-import java.util.Objects;
 
 public class MyWebSocketMsgHandler implements IWsMsgHandler {
     private static Logger logger = LoggerFactory.getLogger(MyWebSocketMsgHandler.class);
     private UserService userService = SpringUtils.getBean(UserService.class);
     private ImUserGroupsService imUserGroupsService = SpringUtils.getBean(ImUserGroupsService.class);
     private ImFriendsService imFriendsService = SpringUtils.getBean(ImFriendsService.class);
+    private ImAnalysisService imAnalysisService = SpringUtils.getBean(ImAnalysisService.class);
 
     @Override
     public HttpResponse handshake(HttpRequest httpRequest, HttpResponse httpResponse, ChannelContext channelContext) throws Exception {
@@ -83,9 +78,8 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
             return;
         }
         //构建消息体
-        LayimToClientOnlineStatusMsgBody msgBody = new LayimToClientOnlineStatusMsgBody(uid, online);
+        ImToClientOnlineStatusMsgBody msgBody = new ImToClientOnlineStatusMsgBody(uid, online);
         WsResponse statusPacket = BodyConvert.getInstance().convertToTextResponse(msgBody);
-
         //调用sendToAll的方法
         Tio.sendToAll(channelContext.getGroupContext(), statusPacket, filterChannelContext -> {
             //筛选掉已经移除和关闭的连接
@@ -121,8 +115,9 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
 
     @Override
     public Object onClose(WsRequest wsRequest, byte[] bytes, ChannelContext channelContext) throws Exception {
-           notify(channelContext,false);
-           Tio.remove(channelContext,"onClose");
+        logger.info("---------------------------onClose---------------------------");
+        notify(channelContext, false);
+        Tio.remove(channelContext, "onClose");
         return null;
     }
 
@@ -131,7 +126,8 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
      */
     @Override
     public Object onText(WsRequest wsRequest, String text, ChannelContext channelContext) throws Exception {
-        logger.info("---------------------------接收到文本消息---------------------------{}" + text);
+        //处理消息体
+        imAnalysisService.convertToClientMsgBody(text, channelContext);
         return null;
     }
 }

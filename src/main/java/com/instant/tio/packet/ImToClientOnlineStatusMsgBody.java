@@ -1,11 +1,6 @@
 package com.instant.tio.packet;
 
-import com.instant.tio.inter.MsgType;
-
-/**
- *在线状态
- * */
-public class LayimToClientOnlineStatusMsgBody extends LayimBaseBody {
+public class ImToClientOnlineStatusMsgBody extends ImBaseBody{
 
     private static final String ONLINE = "online";
     private static final String OFFLINE = "offline";
@@ -19,7 +14,7 @@ public class LayimToClientOnlineStatusMsgBody extends LayimBaseBody {
 
     }
 
-    public LayimToClientOnlineStatusMsgBody(long userId,boolean online){
+    public ImToClientOnlineStatusMsgBody(long userId,boolean online){
         this.id = userId;
         this.status = online ? ONLINE : OFFLINE;
     }

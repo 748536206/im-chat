@@ -1,11 +1,7 @@
 package com.instant.tio.packet;
 
-/**
- * @author fyp
- * @crate 2017/11/19 23:23
- * @project SpringBootLayIM
- */
-public class LayimMsgProperty {
+
+public class ImyimMsgProperty {
     public byte getMtype() {
         return mtype;
     }

@@ -7,7 +7,7 @@ import com.instant.entity.vo.FriendGroupViewModel;
 import com.instant.entity.vo.LayimInitDataViewModel;
 import com.instant.entity.vo.UserViewModel;
 import com.instant.service.*;
-import com.instant.util.UserInfoUtil;
+import com.instant.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +42,8 @@ public class InitializationsServiceImpl implements InitializationsService {
         List<BigGroupViewModel> bigGroupViewModelList=new ArrayList<>();
         //获取当前登录用户人信息
         int userId = 0;
-        if (null != UserInfoUtil.getUser() && UserInfoUtil.getUser().getUid() != 0) {
-            userId = UserInfoUtil.getUser().getUid();
+        if (null != UserUtil.getUser() && UserUtil.getUser().getUid() != 0) {
+            userId = UserUtil.getUser().getUid();
             //获取用户信息
             UserInfo userInfo = userService.selectUserInfo(userId);
             //按格组装用户信息

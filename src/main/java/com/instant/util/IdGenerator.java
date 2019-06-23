@@ -1,10 +1,5 @@
 package com.instant.util;
 
-/**
- * @author fyp
- * @crate 2017/11/2 21:15
- * @project SpringBootLayIM
- */
 
 public class IdGenerator {
     /**

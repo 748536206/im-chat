@@ -1,6 +1,5 @@
 package com.instant.controller;
 
-import cn.hutool.core.util.IdUtil;
 import com.instant.entity.Response;
 import com.instant.service.LayimService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
 
 /**
  * layim

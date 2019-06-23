@@ -2,7 +2,7 @@ package com.instant.shiro.controller;
 
 import com.instant.entity.Response;
 import com.instant.shiro.enity.UserInfo;
-import com.instant.util.UserInfoUtil;
+import com.instant.util.UserUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ public class UserInfoController {
     @RequestMapping("/userList")
     @RequiresPermissions("userInfo:view")//权限管理;
     public Response userInfo(){
-       UserInfo userInfo= UserInfoUtil.getUser();
+       UserInfo userInfo= UserUtil.getUser();
         return new Response().success(userInfo);
     }
 

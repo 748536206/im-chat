@@ -2,12 +2,7 @@ package com.instant.tio.packet;
 
 import java.io.Serializable;
 
-/**
- * @author fyp
- * @crate 2017/11/19 20:56
- * @project SpringBootLayIM
- */
-public class LayimBaseBody extends LayimMsgProperty implements Serializable{
+public class ImBaseBody extends ImyimMsgProperty implements Serializable{
     private static final Long serialVersionUID = 1L;
     public long getTimestamp() {
         if (timestamp == 0){

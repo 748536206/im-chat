@@ -2,15 +2,14 @@ package com.instant.util;
 
 import com.instant.shiro.enity.UserInfo;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * 用户登录信息
  */
-public class UserInfoUtil {
-    private static Logger logger = LoggerFactory.getLogger(UserInfoUtil.class);
+public class UserUtil {
+    private static Logger logger = LoggerFactory.getLogger(UserUtil.class);
 
     /**
      * 获取用户登录信息
