@@ -18,7 +18,7 @@ public class ImUserGroupstouser implements Serializable {
     private Integer ugUserid;
 
     /**
-     * 外键
+     * 外键群id
      */
     private Integer ugGroupid;
 
@@ -55,7 +55,7 @@ public class ImUserGroupstouser implements Serializable {
 
     /**
      * 外键
-     * @return ug _userid 外键
+     * @return ug_userid 外键
      */
     public Integer getUgUserid() {
         return ugUserid;
@@ -70,16 +70,16 @@ public class ImUserGroupstouser implements Serializable {
     }
 
     /**
-     * 外键
-     * @return ug _groupid 外键
+     * 外键群id
+     * @return ug_groupid 外键群id
      */
     public Integer getUgGroupid() {
         return ugGroupid;
     }
 
     /**
-     * 外键
-     * @param ugGroupid 外键
+     * 外键群id
+     * @param ugGroupid 外键群id
      */
     public void setUgGroupid(Integer ugGroupid) {
         this.ugGroupid = ugGroupid;
@@ -87,7 +87,7 @@ public class ImUserGroupstouser implements Serializable {
 
     /**
      * 发送时间
-     * @return ug _createtime 发送时间
+     * @return ug_createtime 发送时间
      */
     public Date getUgCreatetime() {
         return ugCreatetime;
@@ -103,7 +103,7 @@ public class ImUserGroupstouser implements Serializable {
 
     /**
      * 群内用户昵称
-     * @return ug _groupnick 群内用户昵称
+     * @return ug_groupnick 群内用户昵称
      */
     public String getUgGroupnick() {
         return ugGroupnick;
@@ -119,7 +119,7 @@ public class ImUserGroupstouser implements Serializable {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     @Override
     public String toString() {

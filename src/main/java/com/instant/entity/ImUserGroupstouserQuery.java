@@ -42,7 +42,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public ImUserGroupstouserQuery() {
         oredCriteria = new ArrayList<Criteria>();
@@ -50,7 +50,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -58,7 +58,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -66,7 +66,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -74,7 +74,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public boolean isDistinct() {
         return distinct;
@@ -82,7 +82,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -90,7 +90,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -98,7 +98,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -108,7 +108,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -120,7 +120,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -129,7 +129,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void clear() {
         oredCriteria.clear();
@@ -139,7 +139,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setPageNo(Integer pageNo) {
         this.pageNo=pageNo;
@@ -148,7 +148,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public Integer getPageNo() {
         return pageNo;
@@ -156,7 +156,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setStartRow(Integer startRow) {
         this.startRow=startRow;
@@ -164,7 +164,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public Integer getStartRow() {
         return startRow;
@@ -172,7 +172,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setPageSize(Integer pageSize) {
         this.pageSize=pageSize;
@@ -181,7 +181,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public Integer getPageSize() {
         return pageSize;
@@ -189,7 +189,7 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public void setFields(String fields) {
         this.fields=fields;
@@ -197,14 +197,14 @@ public class ImUserGroupstouserQuery {
 
     /**
      *
-     * @mbg.generated 2019-06-18
+     * @mbg.generated 2019-06-25
      */
     public String getFields() {
         return fields;
     }
 
     /**
-     * im_user_groupstouser 2019-06-18
+     * im_user_groupstouser 2019-06-25
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -308,252 +308,252 @@ public class ImUserGroupstouserQuery {
         }
 
         public Criteria andUgUseridIsNull() {
-            addCriterion("\"ug _userid\" is null");
+            addCriterion("ug_userid is null");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridIsNotNull() {
-            addCriterion("\"ug _userid\" is not null");
+            addCriterion("ug_userid is not null");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridEqualTo(Integer value) {
-            addCriterion("\"ug _userid\" =", value, "ugUserid");
+            addCriterion("ug_userid =", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridNotEqualTo(Integer value) {
-            addCriterion("\"ug _userid\" <>", value, "ugUserid");
+            addCriterion("ug_userid <>", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridGreaterThan(Integer value) {
-            addCriterion("\"ug _userid\" >", value, "ugUserid");
+            addCriterion("ug_userid >", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("\"ug _userid\" >=", value, "ugUserid");
+            addCriterion("ug_userid >=", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridLessThan(Integer value) {
-            addCriterion("\"ug _userid\" <", value, "ugUserid");
+            addCriterion("ug_userid <", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridLessThanOrEqualTo(Integer value) {
-            addCriterion("\"ug _userid\" <=", value, "ugUserid");
+            addCriterion("ug_userid <=", value, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridIn(List<Integer> values) {
-            addCriterion("\"ug _userid\" in", values, "ugUserid");
+            addCriterion("ug_userid in", values, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridNotIn(List<Integer> values) {
-            addCriterion("\"ug _userid\" not in", values, "ugUserid");
+            addCriterion("ug_userid not in", values, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridBetween(Integer value1, Integer value2) {
-            addCriterion("\"ug _userid\" between", value1, value2, "ugUserid");
+            addCriterion("ug_userid between", value1, value2, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgUseridNotBetween(Integer value1, Integer value2) {
-            addCriterion("\"ug _userid\" not between", value1, value2, "ugUserid");
+            addCriterion("ug_userid not between", value1, value2, "ugUserid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidIsNull() {
-            addCriterion("\"ug _groupid\" is null");
+            addCriterion("ug_groupid is null");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidIsNotNull() {
-            addCriterion("\"ug _groupid\" is not null");
+            addCriterion("ug_groupid is not null");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidEqualTo(Integer value) {
-            addCriterion("\"ug _groupid\" =", value, "ugGroupid");
+            addCriterion("ug_groupid =", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidNotEqualTo(Integer value) {
-            addCriterion("\"ug _groupid\" <>", value, "ugGroupid");
+            addCriterion("ug_groupid <>", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidGreaterThan(Integer value) {
-            addCriterion("\"ug _groupid\" >", value, "ugGroupid");
+            addCriterion("ug_groupid >", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("\"ug _groupid\" >=", value, "ugGroupid");
+            addCriterion("ug_groupid >=", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidLessThan(Integer value) {
-            addCriterion("\"ug _groupid\" <", value, "ugGroupid");
+            addCriterion("ug_groupid <", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidLessThanOrEqualTo(Integer value) {
-            addCriterion("\"ug _groupid\" <=", value, "ugGroupid");
+            addCriterion("ug_groupid <=", value, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidIn(List<Integer> values) {
-            addCriterion("\"ug _groupid\" in", values, "ugGroupid");
+            addCriterion("ug_groupid in", values, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidNotIn(List<Integer> values) {
-            addCriterion("\"ug _groupid\" not in", values, "ugGroupid");
+            addCriterion("ug_groupid not in", values, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidBetween(Integer value1, Integer value2) {
-            addCriterion("\"ug _groupid\" between", value1, value2, "ugGroupid");
+            addCriterion("ug_groupid between", value1, value2, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupidNotBetween(Integer value1, Integer value2) {
-            addCriterion("\"ug _groupid\" not between", value1, value2, "ugGroupid");
+            addCriterion("ug_groupid not between", value1, value2, "ugGroupid");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeIsNull() {
-            addCriterion("\"ug _createtime\" is null");
+            addCriterion("ug_createtime is null");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeIsNotNull() {
-            addCriterion("\"ug _createtime\" is not null");
+            addCriterion("ug_createtime is not null");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeEqualTo(Date value) {
-            addCriterion("\"ug _createtime\" =", value, "ugCreatetime");
+            addCriterion("ug_createtime =", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeNotEqualTo(Date value) {
-            addCriterion("\"ug _createtime\" <>", value, "ugCreatetime");
+            addCriterion("ug_createtime <>", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeGreaterThan(Date value) {
-            addCriterion("\"ug _createtime\" >", value, "ugCreatetime");
+            addCriterion("ug_createtime >", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("\"ug _createtime\" >=", value, "ugCreatetime");
+            addCriterion("ug_createtime >=", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeLessThan(Date value) {
-            addCriterion("\"ug _createtime\" <", value, "ugCreatetime");
+            addCriterion("ug_createtime <", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("\"ug _createtime\" <=", value, "ugCreatetime");
+            addCriterion("ug_createtime <=", value, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeIn(List<Date> values) {
-            addCriterion("\"ug _createtime\" in", values, "ugCreatetime");
+            addCriterion("ug_createtime in", values, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeNotIn(List<Date> values) {
-            addCriterion("\"ug _createtime\" not in", values, "ugCreatetime");
+            addCriterion("ug_createtime not in", values, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeBetween(Date value1, Date value2) {
-            addCriterion("\"ug _createtime\" between", value1, value2, "ugCreatetime");
+            addCriterion("ug_createtime between", value1, value2, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgCreatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("\"ug _createtime\" not between", value1, value2, "ugCreatetime");
+            addCriterion("ug_createtime not between", value1, value2, "ugCreatetime");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickIsNull() {
-            addCriterion("\"ug _groupnick\" is null");
+            addCriterion("ug_groupnick is null");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickIsNotNull() {
-            addCriterion("\"ug _groupnick\" is not null");
+            addCriterion("ug_groupnick is not null");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickEqualTo(String value) {
-            addCriterion("\"ug _groupnick\" =", value, "ugGroupnick");
+            addCriterion("ug_groupnick =", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickNotEqualTo(String value) {
-            addCriterion("\"ug _groupnick\" <>", value, "ugGroupnick");
+            addCriterion("ug_groupnick <>", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickGreaterThan(String value) {
-            addCriterion("\"ug _groupnick\" >", value, "ugGroupnick");
+            addCriterion("ug_groupnick >", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickGreaterThanOrEqualTo(String value) {
-            addCriterion("\"ug _groupnick\" >=", value, "ugGroupnick");
+            addCriterion("ug_groupnick >=", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickLessThan(String value) {
-            addCriterion("\"ug _groupnick\" <", value, "ugGroupnick");
+            addCriterion("ug_groupnick <", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickLessThanOrEqualTo(String value) {
-            addCriterion("\"ug _groupnick\" <=", value, "ugGroupnick");
+            addCriterion("ug_groupnick <=", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickLike(String value) {
-            addCriterion("\"ug _groupnick\" like", value, "ugGroupnick");
+            addCriterion("ug_groupnick like", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickNotLike(String value) {
-            addCriterion("\"ug _groupnick\" not like", value, "ugGroupnick");
+            addCriterion("ug_groupnick not like", value, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickIn(List<String> values) {
-            addCriterion("\"ug _groupnick\" in", values, "ugGroupnick");
+            addCriterion("ug_groupnick in", values, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickNotIn(List<String> values) {
-            addCriterion("\"ug _groupnick\" not in", values, "ugGroupnick");
+            addCriterion("ug_groupnick not in", values, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickBetween(String value1, String value2) {
-            addCriterion("\"ug _groupnick\" between", value1, value2, "ugGroupnick");
+            addCriterion("ug_groupnick between", value1, value2, "ugGroupnick");
             return (Criteria) this;
         }
 
         public Criteria andUgGroupnickNotBetween(String value1, String value2) {
-            addCriterion("\"ug _groupnick\" not between", value1, value2, "ugGroupnick");
+            addCriterion("ug_groupnick not between", value1, value2, "ugGroupnick");
             return (Criteria) this;
         }
     }
@@ -569,7 +569,7 @@ public class ImUserGroupstouserQuery {
     }
 
     /**
-     * im_user_groupstouser 2019-06-18
+     * im_user_groupstouser 2019-06-25
      */
     public static class Criterion {
         private String condition;

@@ -3,10 +3,10 @@
 <mapper namespace="com.instant.dao.ImUserGroupstouserDao">
   <resultMap id="BaseResultMap" type="com.instant.entity.ImUserGroupstouser">
     <id column="ug_id" jdbcType="INTEGER" property="ugId" />
-    <result column="ug _userid" jdbcType="INTEGER" property="ugUserid" />
-    <result column="ug _groupid" jdbcType="INTEGER" property="ugGroupid" />
-    <result column="ug _createtime" jdbcType="TIMESTAMP" property="ugCreatetime" />
-    <result column="ug _groupnick" jdbcType="VARCHAR" property="ugGroupnick" />
+    <result column="ug_userid" jdbcType="INTEGER" property="ugUserid" />
+    <result column="ug_groupid" jdbcType="INTEGER" property="ugGroupid" />
+    <result column="ug_createtime" jdbcType="TIMESTAMP" property="ugCreatetime" />
+    <result column="ug_groupnick" jdbcType="VARCHAR" property="ugGroupnick" />
   </resultMap>
   <sql id="Query_Where_Clause">
     <where>
@@ -68,7 +68,7 @@
   </sql>
   <sql id="Base_Column_List">
     <if test="fields == null">
-      ug_id, "ug _userid", "ug _groupid", "ug _createtime", "ug _groupnick"
+      ug_id, ug_userid, ug_groupid, ug_createtime, ug_groupnick
     </if>
     <if test="fields != null">
       ${fields}
@@ -93,7 +93,7 @@
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    ug_id,ug _userid,ug _groupid,ug _createtime,ug _groupnick
+    ug_id,ug_userid,ug_groupid,ug_createtime,ug_groupnick
     from im_user_groupstouser
     where ug_id = #{ugId,jdbcType=INTEGER}
   </select>
@@ -108,8 +108,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.instant.entity.ImUserGroupstouser">
-    insert into im_user_groupstouser (ug_id, "ug _userid", "ug _groupid", 
-      "ug _createtime", "ug _groupnick")
+    insert into im_user_groupstouser (ug_id, ug_userid, ug_groupid, 
+      ug_createtime, ug_groupnick)
     values (#{ugId,jdbcType=INTEGER}, #{ugUserid,jdbcType=INTEGER}, #{ugGroupid,jdbcType=INTEGER}, 
       #{ugCreatetime,jdbcType=TIMESTAMP}, #{ugGroupnick,jdbcType=VARCHAR})
   </insert>
@@ -120,16 +120,16 @@
         ug_id,
       </if>
       <if test="ugUserid != null">
-        "ug _userid",
+        ug_userid,
       </if>
       <if test="ugGroupid != null">
-        "ug _groupid",
+        ug_groupid,
       </if>
       <if test="ugCreatetime != null">
-        "ug _createtime",
+        ug_createtime,
       </if>
       <if test="ugGroupnick != null">
-        "ug _groupnick",
+        ug_groupnick,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,16 +163,16 @@
         ug_id = #{record.ugId,jdbcType=INTEGER},
       </if>
       <if test="record.ugUserid != null">
-        "ug _userid" = #{record.ugUserid,jdbcType=INTEGER},
+        ug_userid = #{record.ugUserid,jdbcType=INTEGER},
       </if>
       <if test="record.ugGroupid != null">
-        "ug _groupid" = #{record.ugGroupid,jdbcType=INTEGER},
+        ug_groupid = #{record.ugGroupid,jdbcType=INTEGER},
       </if>
       <if test="record.ugCreatetime != null">
-        "ug _createtime" = #{record.ugCreatetime,jdbcType=TIMESTAMP},
+        ug_createtime = #{record.ugCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.ugGroupnick != null">
-        "ug _groupnick" = #{record.ugGroupnick,jdbcType=VARCHAR},
+        ug_groupnick = #{record.ugGroupnick,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -182,10 +182,10 @@
   <update id="updateByQuery" parameterType="map">
     update im_user_groupstouser
     set ug_id = #{record.ugId,jdbcType=INTEGER},
-      "ug _userid" = #{record.ugUserid,jdbcType=INTEGER},
-      "ug _groupid" = #{record.ugGroupid,jdbcType=INTEGER},
-      "ug _createtime" = #{record.ugCreatetime,jdbcType=TIMESTAMP},
-      "ug _groupnick" = #{record.ugGroupnick,jdbcType=VARCHAR}
+      ug_userid = #{record.ugUserid,jdbcType=INTEGER},
+      ug_groupid = #{record.ugGroupid,jdbcType=INTEGER},
+      ug_createtime = #{record.ugCreatetime,jdbcType=TIMESTAMP},
+      ug_groupnick = #{record.ugGroupnick,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Query_Where_Clause" />
     </if>
@@ -194,26 +194,26 @@
     update im_user_groupstouser
     <set>
       <if test="ugUserid != null">
-        "ug _userid" = #{ugUserid,jdbcType=INTEGER},
+        ug_userid = #{ugUserid,jdbcType=INTEGER},
       </if>
       <if test="ugGroupid != null">
-        "ug _groupid" = #{ugGroupid,jdbcType=INTEGER},
+        ug_groupid = #{ugGroupid,jdbcType=INTEGER},
       </if>
       <if test="ugCreatetime != null">
-        "ug _createtime" = #{ugCreatetime,jdbcType=TIMESTAMP},
+        ug_createtime = #{ugCreatetime,jdbcType=TIMESTAMP},
       </if>
       <if test="ugGroupnick != null">
-        "ug _groupnick" = #{ugGroupnick,jdbcType=VARCHAR},
+        ug_groupnick = #{ugGroupnick,jdbcType=VARCHAR},
       </if>
     </set>
     where ug_id = #{ugId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.instant.entity.ImUserGroupstouser">
     update im_user_groupstouser
-    set "ug _userid" = #{ugUserid,jdbcType=INTEGER},
-      "ug _groupid" = #{ugGroupid,jdbcType=INTEGER},
-      "ug _createtime" = #{ugCreatetime,jdbcType=TIMESTAMP},
-      "ug _groupnick" = #{ugGroupnick,jdbcType=VARCHAR}
+    set ug_userid = #{ugUserid,jdbcType=INTEGER},
+      ug_groupid = #{ugGroupid,jdbcType=INTEGER},
+      ug_createtime = #{ugCreatetime,jdbcType=TIMESTAMP},
+      ug_groupnick = #{ugGroupnick,jdbcType=VARCHAR}
     where ug_id = #{ugId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,9 +1,7 @@
 package com.instant.controller;
 
 import com.instant.entity.ImUserGroups;
-import com.instant.entity.ImUserGroupstouser;
 import com.instant.entity.Response;
-import com.instant.entity.vo.UserViewModel;
 import com.instant.service.ImUserGroupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,7 @@ import java.util.List;
 public class ImImUserGroupsController {
     @Autowired
     private ImUserGroupsService imUserGroupsService;
-    @Autowired
+
     /**
      * 查询群列表
      * @return
