@@ -11,14 +11,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class LayimServiceImpl implements LayimService {
     private static Logger logger = LoggerFactory.getLogger(ImUserGroupsServiceImpl.class);
-
-
-
-
-
-
-
-
     @Override
     public Response getUserToken() {
         int userId = UserUtil.getUser().getUid();

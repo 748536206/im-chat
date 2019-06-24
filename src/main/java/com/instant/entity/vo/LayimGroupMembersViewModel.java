@@ -2,11 +2,7 @@ package com.instant.entity.vo;
 
 import java.util.List;
 
-/**
- * @author fyp
- * @crate 2017/11/8 23:26
- * @project SpringBootLayIM
- */
+
 public class LayimGroupMembersViewModel {
     private UserViewModel owner;
     private List<UserViewModel> list;

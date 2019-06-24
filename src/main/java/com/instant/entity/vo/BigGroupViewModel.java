@@ -1,10 +1,6 @@
 package com.instant.entity.vo;
 
-/**
- * @author fyp
- * @crate 2017/11/2 21:54
- * @project SpringBootLayIM
- */
+
 public class BigGroupViewModel extends BaseViewModel {
     private String groupname;
     private String avatar;

@@ -1,8 +1,4 @@
-/**
- * @author fyp
- * @create 2017-11-21
- * @remark websocket 模块化封装
- * */
+
 
 layui.define(['jquery','layer'],function (exports) {
     var $ = layui.jquery;

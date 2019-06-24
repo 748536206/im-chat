@@ -1,9 +1,6 @@
 package com.instant.entity;
 
-/**
- * Created by xingwang on 2017/8/1.
- * 返回值封装
- */
+
 public class Response<T> {
 
     private static final String OK = "ok";

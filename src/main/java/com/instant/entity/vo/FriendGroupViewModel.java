@@ -2,11 +2,7 @@ package com.instant.entity.vo;
 
 import java.util.List;
 
-/**
- * @author fyp
- * @crate 2017/11/2 21:51
- * @project SpringBootLayIM
- */
+
 public class FriendGroupViewModel extends BaseViewModel {
     private String groupname;
     private int online;

@@ -1,7 +1,6 @@
 package com.instant.controller;
 
 import com.instant.entity.ImUserGroups;
-import com.instant.entity.ImUserGroupstouser;
 import com.instant.service.ImUserGroupsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

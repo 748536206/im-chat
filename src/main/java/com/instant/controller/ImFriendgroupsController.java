@@ -2,7 +2,6 @@ package com.instant.controller;
 
 import com.instant.entity.ImFriendgroups;
 import com.instant.service.ImFriendgroupsService;
-import org.apache.shiro.codec.Hex;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.SecureRandom;
 import java.util.List;
 
 /**

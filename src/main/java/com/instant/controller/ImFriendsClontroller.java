@@ -1,7 +1,6 @@
 package com.instant.controller;
 
 import com.instant.entity.ImFriends;
-import com.instant.entity.UserInfo;
 import com.instant.service.ImFriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

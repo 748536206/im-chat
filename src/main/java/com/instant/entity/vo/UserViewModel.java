@@ -4,11 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
-/**
- * @author fyp
- * @crate 2017/11/2 22:58
- * @project SpringBootLayIM
- */
+
 public class UserViewModel implements Serializable {
     private String username;
     private String avatar;
