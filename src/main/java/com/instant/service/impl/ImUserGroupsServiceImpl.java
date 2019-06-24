@@ -1,8 +1,8 @@
 package com.instant.service.impl;
 
 import com.instant.dao.ImUserGroupsDao;
-import com.instant.entity.ImUserGroups;
-import com.instant.entity.ImUserGroupsQuery;
+import com.instant.dao.ImUserGroupstouserDao;
+import com.instant.entity.*;
 import com.instant.service.ImUserGroupsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,8 @@ public class ImUserGroupsServiceImpl implements ImUserGroupsService {
     private static Logger logger = LoggerFactory.getLogger(ImUserGroupsServiceImpl.class);
     @Autowired
     private ImUserGroupsDao imUserGroupsDao;
-
+    @Autowired
+    private ImUserGroupstouserDao imUserGroupstouserDao;
 
     /**
      * 查询群列表
@@ -30,4 +31,24 @@ public class ImUserGroupsServiceImpl implements ImUserGroupsService {
         List<ImUserGroups> imUserGroupsList = imUserGroupsDao.selectByQuery(imUserGroupsQuery);
         return imUserGroupsList;
     }
+
+
+
+    @Override
+    public Response selectGroupSmember(int id) {
+        ImUserGroupstouserQuery imUserGroupstouserQuery=new ImUserGroupstouserQuery();
+        ImUserGroupstouserQuery.Criteria criteria=imUserGroupstouserQuery.createCriteria();
+        criteria.andUgGroupidEqualTo(id);
+        //查询出群成员
+        List<ImUserGroupstouser> imUserGroupstouserList= imUserGroupstouserDao.selectByQuery(imUserGroupstouserQuery);
+        for (ImUserGroupstouser imUserGroupstouser:imUserGroupstouserList){
+
+        }
+        //查询群成员信息
+
+
+        return null;
+    }
+
+
 }
