@@ -8,6 +8,7 @@ import com.instant.tio.packet.ImyimConst;
 import com.instant.tio.packet.MsgType;
 import com.instant.tio.service.ImAnalysisService;
 import com.instant.tio.service.ImSendService;
+import com.instant.util.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,32 +33,37 @@ public class ImAnalysisServiceImpl implements ImAnalysisService {
      *
      * @return
      */
-    public void convertToClientMsgBody(String text, ChannelContext channelContext) {
+    public void convertToClientMsgBody(String text, ChannelContext channelContext, ImReceiveBody imReceiveBody) {
         String toId = "";
         String masg = "";
-        //解析数据消息
-        logger.info("LayimServerAioHandler:解析消息类型:" + text);
-        ImReceiveBody imReceiveBody = Json.toBean(text, ImReceiveBody.class);
         UserInfo userInfo = userService.selectUserInfo(Integer.parseInt(channelContext.userid));
-        if (ImyimConst.HAND_SHAKE == (imReceiveBody.getMtype())) {
-            return;
-        }
-        if (null != imReceiveBody) {
-            toId = String.valueOf(imReceiveBody.getToid());
-        }
+        toId = String.valueOf(imReceiveBody.getToid());
+        //好友消息处理
         //获取消息处理器
         JSONObject masgBody = new JSONObject();
-        masgBody.put("id", userInfo.getUid());
+        masgBody.put("id", toId);
         masgBody.put("content", imReceiveBody.getContent());
         masgBody.put("timestamp", new Date().getTime());
         masgBody.put("username", userInfo.getUsername());
         masgBody.put("avatar", userInfo.getAvatar());
-        masgBody.put("type", ImyimConst.CHAT_TYPE_FRIEND);
-        masgBody.put("mtype", MsgType.CLIENT_TO_CLIENT);
-        masg = String.valueOf(masgBody);
-        if (StringUtils.isNoneBlank(masg)) {
+        if (ImyimConst.FRIEND == imReceiveBody.getMtype()) {
+            masgBody.put("type", ImyimConst.CHAT_TYPE_FRIEND);
+            masgBody.put("mtype", MsgType.CLIENT_TO_CLIENT);
+            masg = String.valueOf(masgBody);
             WsResponse wsResponse = WsResponse.fromText(masg, MsgType.CHARSET);
-            imSendService.sendToUser(channelContext, toId, wsResponse);
+            if (StringUtils.isNoneBlank(masg)) {
+                imSendService.sendToUser(channelContext, toId, wsResponse);
+            }
+        }
+        if (ImyimConst.GROUP == imReceiveBody.getMtype()) {
+            masgBody.put("type", ImyimConst.CHAT_TYPE_GROUP);
+            masgBody.put("mtype", MsgType.CLIENT_TO_GROUP);
+            masgBody.put("from", channelContext.userid);
+            masg = String.valueOf(masgBody);
+            WsResponse wsResponse = WsResponse.fromText(masg, MsgType.CHARSET);
+            if (StringUtils.isNoneBlank(masg)) {
+                imSendService.sendToGroup(channelContext, toId, wsResponse);
+            }
         }
     }
 }

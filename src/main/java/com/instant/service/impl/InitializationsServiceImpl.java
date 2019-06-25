@@ -1,6 +1,7 @@
 package com.instant.service.impl;
 
 
+import com.instant.dao.ImUserGroupstouserDao;
 import com.instant.entity.*;
 import com.instant.entity.vo.BigGroupViewModel;
 import com.instant.entity.vo.FriendGroupViewModel;
@@ -8,6 +9,7 @@ import com.instant.entity.vo.LayimInitDataViewModel;
 import com.instant.entity.vo.UserViewModel;
 import com.instant.service.*;
 import com.instant.util.UserUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class InitializationsServiceImpl implements InitializationsService {
         //总返回 信息
         LayimInitDataViewModel layimInitDataViewModel = new LayimInitDataViewModel();
         List<FriendGroupViewModel> friendGroupViewModelList = new ArrayList<>();
-        List<BigGroupViewModel> bigGroupViewModelList=new ArrayList<>();
+        List<BigGroupViewModel> bigGroupViewModelList = new ArrayList<>();
         //获取当前登录用户人信息
         int userId = 0;
         if (null != UserUtil.getUser() && UserUtil.getUser().getUid() != 0) {
@@ -88,16 +90,20 @@ public class InitializationsServiceImpl implements InitializationsService {
                     friendGroupViewModelList.add(friendGroupViewModel);
                 }
             layimInitDataViewModel.setFriend(friendGroupViewModelList);
-            //查询群组信息
-            List<ImUserGroups> imUserGroupsList = imUserGroupsService.selectGroupstouser(userId);
-            if (null!=imUserGroupsList&&imUserGroupsList.size()>0)
-            for (ImUserGroups imUserGroups:imUserGroupsList){
-                BigGroupViewModel bigGroupViewModel=new BigGroupViewModel();
-                bigGroupViewModel.setGroupname(imUserGroups.getUgName());
-                bigGroupViewModel.setAvatar(imUserGroups.getUgIcon());
-                bigGroupViewModel.setId(imUserGroups.getUgId());
-                bigGroupViewModelList.add(bigGroupViewModel);
-            }
+            //查询自己拥有的群
+            List<ImUserGroupstouser> imUserGroupstouserList = imUserGroupsService.selectHaveUserGroups(userId);
+            if (null != imUserGroupstouserList && imUserGroupstouserList.size() > 0)
+                for (ImUserGroupstouser imUserGroupstouser : imUserGroupstouserList) {
+                    //查询群信息
+                    ImUserGroups imUserGroups = imUserGroupsService.selectGroupstouser(imUserGroupstouser.getUgGroupid());
+                    if (null != imUserGroups) {
+                        BigGroupViewModel bigGroupViewModel = new BigGroupViewModel();
+                        bigGroupViewModel.setGroupname(imUserGroups.getUgName());
+                        bigGroupViewModel.setAvatar(imUserGroups.getUgIcon());
+                        bigGroupViewModel.setId(imUserGroups.getUgId());
+                        bigGroupViewModelList.add(bigGroupViewModel);
+                    }
+                }
             layimInitDataViewModel.setGroup(bigGroupViewModelList);
             return new Response().success(layimInitDataViewModel);
         }

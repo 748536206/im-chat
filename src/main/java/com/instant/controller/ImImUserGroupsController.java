@@ -24,9 +24,9 @@ public class ImImUserGroupsController {
      * @return
      */
     @RequestMapping(value = "/selectGroupstouser", method = RequestMethod.GET)
-    public List<ImUserGroups> selectGroupstouser(int userId) {
-        List<ImUserGroups> imUserGroupsList = imUserGroupsService.selectGroupstouser(userId);
-        return imUserGroupsList;
+    public ImUserGroups selectGroupstouser(int userId) {
+        ImUserGroups imUserGroups = imUserGroupsService.selectGroupstouser(userId);
+        return imUserGroups;
     }
 
     /**

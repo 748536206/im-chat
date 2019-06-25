@@ -27,17 +27,17 @@ public class ImUserGroupsServiceImpl implements ImUserGroupsService {
     private UserService userService;
 
     /**
-     * 查询群列表
+     * 查询群信息
      *
      * @return
      */
     @Override
-    public List<ImUserGroups> selectGroupstouser(int userId) {
+    public ImUserGroups selectGroupstouser(int UgId) {
         ImUserGroupsQuery imUserGroupsQuery = new ImUserGroupsQuery();
         ImUserGroupsQuery.Criteria criteria = imUserGroupsQuery.createCriteria();
-        criteria.andUgAdminidEqualTo(userId);
-        List<ImUserGroups> imUserGroupsList = imUserGroupsDao.selectByQuery(imUserGroupsQuery);
-        return imUserGroupsList;
+        criteria.andUgIdEqualTo(UgId);
+        ImUserGroups imUserGroups = imUserGroupsDao.selectByPrimaryKey(UgId);
+        return imUserGroups;
     }
 
 
@@ -73,5 +73,18 @@ public class ImUserGroupsServiceImpl implements ImUserGroupsService {
         return new Response().success(layimGroupMembersViewModel);
     }
 
+
+    /**
+     *查询自己所拥有的群
+     * @param id
+     * @return
+     */
+    public List<ImUserGroupstouser> selectHaveUserGroups(int id){
+    ImUserGroupstouserQuery imUserGroupstouserQuery = new ImUserGroupstouserQuery();
+    ImUserGroupstouserQuery.Criteria criteria = imUserGroupstouserQuery.createCriteria();
+    criteria.andUgUseridEqualTo(id);
+    List<ImUserGroupstouser> imUserGroupstouserList = imUserGroupstouserDao.selectByQuery(imUserGroupstouserQuery);
+    return imUserGroupstouserList;
+    }
 
 }

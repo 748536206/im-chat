@@ -26,4 +26,21 @@ public class ImSendServiceImpl implements ImSendService {
             logger.info("--------------消息发送失败------------"+e);
         }
     }
+
+    /**
+     * 发送群聊消息
+     * @param channelContext
+     * @param guid
+     * @param packet
+     */
+    @Override
+    public void sendToGroup(ChannelContext channelContext, String guid, Packet packet) {
+        try {
+            Tio.sendToGroup(channelContext.groupContext, guid, packet);
+        } catch (Exception e) {
+            logger.info("--------------群聊消息发送失败------------"+e);
+        }
+    }
+
+
 }

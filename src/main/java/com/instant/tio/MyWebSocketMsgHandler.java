@@ -2,6 +2,7 @@ package com.instant.tio;
 
 import com.instant.entity.ImFriends;
 import com.instant.entity.ImUserGroups;
+import com.instant.entity.ImUserGroupstouser;
 import com.instant.entity.UserInfo;
 import com.instant.service.ImFriendsService;
 import com.instant.service.ImUserGroupsService;
@@ -10,6 +11,7 @@ import com.instant.tio.packet.*;
 import com.instant.tio.service.ImAnalysisService;
 import com.instant.util.SpringUtils;
 import com.instant.util.TokenVerify;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tio.core.ChannelContext;
@@ -17,6 +19,7 @@ import org.tio.core.Tio;
 import org.tio.http.common.HttpRequest;
 import org.tio.http.common.HttpResponse;
 import org.tio.http.common.HttpResponseStatus;
+import org.tio.utils.json.Json;
 import org.tio.websocket.common.WsRequest;
 import org.tio.websocket.common.WsResponse;
 import org.tio.websocket.server.handler.IWsMsgHandler;
@@ -53,11 +56,11 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
                 //绑定用户ID
                 Tio.bindUser(channelContext, userId);
                 //绑定用户群组
-                List<ImUserGroups> imUserGroupsList = imUserGroupsService.selectGroupstouser(Integer.parseInt(userId));
+                List<ImUserGroupstouser> imUserGroupstouserList = imUserGroupsService.selectHaveUserGroups(Integer.parseInt(userId));
                 //绑定用户群信息
-                if (null != imUserGroupsList && imUserGroupsList.size() > 0) {
-                    for (ImUserGroups imUserGroups : imUserGroupsList) {
-                        Tio.bindGroup(channelContext, String.valueOf(imUserGroups.getUgId()));
+                if (null != imUserGroupstouserList && imUserGroupstouserList.size() > 0) {
+                    for (ImUserGroupstouser imUserGroupstouser : imUserGroupstouserList) {
+                        Tio.bindGroup(channelContext, String.valueOf(imUserGroupstouser.getUgGroupid()));
                     }
                 }
                 //通知所有好友本人上线了
@@ -126,8 +129,13 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
      */
     @Override
     public Object onText(WsRequest wsRequest, String text, ChannelContext channelContext) throws Exception {
-        //处理消息体
-        imAnalysisService.convertToClientMsgBody(text, channelContext);
+        //解析数据消息
+        logger.info("-----------------收到消息-----------------:" + text);
+        ImReceiveBody imReceiveBody = Json.toBean(text, ImReceiveBody.class);
+        if (null != imReceiveBody && StringUtils.isNoneBlank(imReceiveBody.getContent())) {
+            //处理消息体
+            imAnalysisService.convertToClientMsgBody(text, channelContext,imReceiveBody);
+        }
         return null;
     }
 }
