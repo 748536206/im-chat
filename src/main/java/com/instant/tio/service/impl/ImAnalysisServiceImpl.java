@@ -41,12 +41,12 @@ public class ImAnalysisServiceImpl implements ImAnalysisService {
         //好友消息处理
         //获取消息处理器
         JSONObject masgBody = new JSONObject();
-        masgBody.put("id", toId);
         masgBody.put("content", imReceiveBody.getContent());
         masgBody.put("timestamp", new Date().getTime());
         masgBody.put("username", userInfo.getUsername());
         masgBody.put("avatar", userInfo.getAvatar());
         if (ImyimConst.FRIEND == imReceiveBody.getMtype()) {
+            masgBody.put("id", channelContext.userid);
             masgBody.put("type", ImyimConst.CHAT_TYPE_FRIEND);
             masgBody.put("mtype", MsgType.CLIENT_TO_CLIENT);
             masg = String.valueOf(masgBody);
@@ -56,6 +56,7 @@ public class ImAnalysisServiceImpl implements ImAnalysisService {
             }
         }
         if (ImyimConst.GROUP == imReceiveBody.getMtype()) {
+            masgBody.put("id", imReceiveBody.getToid());
             masgBody.put("type", ImyimConst.CHAT_TYPE_GROUP);
             masgBody.put("mtype", MsgType.CLIENT_TO_GROUP);
             masgBody.put("from", channelContext.userid);

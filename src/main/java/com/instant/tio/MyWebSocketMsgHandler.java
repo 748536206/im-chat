@@ -134,7 +134,7 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
         ImReceiveBody imReceiveBody = Json.toBean(text, ImReceiveBody.class);
         if (null != imReceiveBody && StringUtils.isNoneBlank(imReceiveBody.getContent())) {
             //处理消息体
-            imAnalysisService.convertToClientMsgBody(text, channelContext,imReceiveBody);
+            imAnalysisService.convertToClientMsgBody(text, channelContext, imReceiveBody);
         }
         return null;
     }
