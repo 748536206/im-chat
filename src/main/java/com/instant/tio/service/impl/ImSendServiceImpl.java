@@ -13,7 +13,7 @@ public class ImSendServiceImpl implements ImSendService {
     private static Logger logger = LoggerFactory.getLogger(ImSendServiceImpl.class);
 
     /**
-     * 发送单聊消息
+     * 发送单聊消息(Tio.sendToUser 返回true代表好友在线  返回false 代表好友不在线)
      * @param channelContext
      * @param userid
      * @param packet
@@ -21,7 +21,12 @@ public class ImSendServiceImpl implements ImSendService {
     @Override
     public void sendToUser(ChannelContext channelContext, String userid, Packet packet) {
         try {
-            Tio.sendToUser(channelContext.groupContext, userid, packet);
+           boolean state = Tio.sendToUser(channelContext.groupContext, userid, packet);
+           if (state) {
+               logger.info("-----------好友在线-------------");
+           }else {
+               logger.info("-----------好友离线-------------");
+           }
         } catch (Exception e) {
             logger.info("--------------消息发送失败------------"+e);
         }

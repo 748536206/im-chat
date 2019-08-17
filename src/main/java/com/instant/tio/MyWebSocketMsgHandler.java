@@ -115,7 +115,14 @@ public class MyWebSocketMsgHandler implements IWsMsgHandler {
         return null;
     }
 
-
+    /**
+     * 关闭连接
+     * @param wsRequest
+     * @param bytes
+     * @param channelContext
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object onClose(WsRequest wsRequest, byte[] bytes, ChannelContext channelContext) throws Exception {
         logger.info("---------------------------onClose---------------------------");

@@ -42,6 +42,9 @@
             ,msgbox: '/layim/msgbox'
             ,find: layui.cache.dir + 'css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
             ,chatLog: layui.cache.dir + 'css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
+            ,copyright:true //是否授权。如果非授权获得，或将LayIM应用在第三方，建议保留，即不设置。
+            ,isfriend:true //是否开启好友。
+            ,isgroup:true //是否开启群组
 
         });
         socket.config({
